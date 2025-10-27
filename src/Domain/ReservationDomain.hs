@@ -1,5 +1,10 @@
 {-# LANGUAGE DeriveGeneric #-}
-module Domain.ReservationDomain where
+module Domain.ReservationDomain
+  ( Reservation(..)
+  , ReservationMap
+  , usedCapacity
+  , availableSeats
+  ) where
 
 import Data.Map.Strict (Map)
 import Data.Time.Calendar (Day)
@@ -15,8 +20,8 @@ data Reservation = Reservation
   }
   deriving (Eq, Generic, Read, Show)
 
-reservation :: Reservation
-reservation = Reservation{name = "Mr. Miller", quantity = 2, date = read "2020-06-01", email = "manfred@miller.com"}
+-- reservation :: Reservation
+-- reservation = Reservation{name = "Mr. Miller", quantity = 2, date = read "2020-06-01", email = "manfred@miller.com"}
 
 -- | a key value map holding a list of reservations for any given day
 type ReservationMap = Map Day [Reservation]
