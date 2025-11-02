@@ -1,0 +1,10 @@
+cradle:
+  cabal:
+    - path: "src"
+      component: "lib:clean"
+
+    - path: "app/Main.hs"
+      component: "clean:exe:clean"
+
+    - path: "test"
+      component: "clean:test:clean-test"

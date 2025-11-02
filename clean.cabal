@@ -15,19 +15,40 @@ extra-doc-files:    CHANGELOG.md
 common warnings
     ghc-options: -Wall
 
+common polysemy-settings
+    build-depends:
+        polysemy ^>=1.9.2.0,
+        polysemy-plugin
+    ghc-options:
+        -O2
+        -flate-specialise
+        -fspecialise-aggressively
+        -fplugin=Polysemy.Plugin
+    default-extensions:
+        DataKinds
+        FlexibleContexts
+        GADTs
+        LambdaCase
+        PolyKinds
+        RankNTypes
+        ScopedTypeVariables
+        TypeApplications
+        TypeOperators
+        TypeFamilies
+
 library
-    import:           warnings
+    import:           warnings, polysemy-settings
     exposed-modules:  Domain.ReservationDomain
     -- other-modules:
     -- other-extensions:
     build-depends:    base ^>=4.20.2.0,
-                      containers ^>=0.7,
-                      time ^>=1.12.2
+                      containers,
+                      time
     hs-source-dirs:   src
     default-language: Haskell2010
 
 executable clean
-    import:           warnings
+    import:           warnings, polysemy-settings
     main-is:          Main.hs
     -- other-modules:
     -- other-extensions:
@@ -39,7 +60,7 @@ executable clean
     default-language: Haskell2010
 
 test-suite clean-test
-    import:           warnings
+    import:           warnings, polysemy-settings
     default-language: Haskell2010
     other-modules:    DomainSpec
     -- other-extensions:
@@ -50,4 +71,4 @@ test-suite clean-test
         base ^>=4.20.2.0,
         clean,
         hspec,
-        time ^>=1.12.2,
+        time
